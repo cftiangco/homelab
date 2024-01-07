@@ -1,3 +1,6 @@
+# check file format for vscode for note taking
+
 # check logs
 kubectl logs [pod name] -c qbittorrent
 kubectl logs bittorrent-deployment-57b48645b8-c4j6p -c qbittorrent
+
