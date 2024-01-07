@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bittorrent-deployment
+spec:
+  template:
+    metadata:
+      name: qbittorrent
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+        - name: qbittorrent
+          image: linuxserver/qbittorrent
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Etc/UTC"
+            - name: WEBUI_PORT
+              value: "30088"
+          volumeMounts:
+            - mountPath: /config
+              name: config-volume
+            - mountPath: /downloads
+              name: download-volume
+      volumes: 
+        - name: config-volume
+          hostPath:
+            path: /home/cftiangco/storage/qbittorrent/config
+        - name: download-volume
+          hostPath:
+            path: /home/cftiangco/storage/qbittorrent/downloads 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent-service
+spec:
+  type: NodePort
+  selector:
+    app: qbittorrent
+  ports:
+    - name: web
+      protocol: TCP
+      port: 30088
+      targetPort: 30088
+      nodePort: 30088
+    - name: tcp-6881
+      protocol: TCP
+      port: 6881
+      targetPort: 6881
+      nodePort: 30081
+    - name: udp-6881
+      protocol: UDP
+      port: 6881
+      targetPort: 6881
+      nodePort: 30081
+
