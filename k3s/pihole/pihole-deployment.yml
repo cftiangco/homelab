@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole
+spec:
+  template:
+    metadata:
+      name: pihole
+      labels:
+        app: pihole
+    spec:
+      containers:
+        - image: pihole/pihole:latest
+          name: pihole
+          env:
+            - name: TZ
+              value: 'America/Chicago'
+            - name: WEBPASSWORD
+              value: 'p@ssw0rd'
+          volumeMounts:
+            - mountPath: /etc/pihole
+              name: pihole-etc-pihole
+            - mountPath: /etc/dnsmasq.d'
+              name: pihole-etc-dnsmasq
+      volumes:
+        - name: pihole-etc-pihole
+          hostPath:
+            path: /media/SanDisk128/data/pihole/etc-pihole
+        - name: pihole-etc-dnsmasq
+          hostPath:
+            path: /media/SanDisk128/data/pihole/etc-dnsmasq.d
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pihole
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-service
+spec:
+  type: NodePort
+  selector:
+    app: pihole
+  ports:
+    - name: tcp-53
+      protocol: TCP
+      port: 53
+      targetPort: 53
+      nodePort: 30053
+    - name: udp-53
+      protocol: UDP
+      port: 53
+      targetPort: 53
+      nodePort: 30053
+    - name: udp-67
+      protocol: UDP
+      port: 67
+      targetPort: 67
+      nodePort: 30067
+    - name: tcp-80
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30080
+          

@@ -13,11 +13,11 @@ services:
       - "80:80/tcp"
     environment:
       TZ: 'America/Chicago'
-      WEBPASSWORD: 'p@ssw0rd'
+      # WEBPASSWORD: 'set a secure password here or it will be random'
     # Volumes store your data between container upgrades
     volumes:
-      - /home/cftiangco/storage/qbittorent/appdata:/config
-      - /home/cftiangco/storage/qbittorent/downloads:/downloads
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
