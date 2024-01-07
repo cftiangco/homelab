@@ -29,10 +29,10 @@ spec:
       volumes: 
         - name: config-volume
           hostPath:
-            path: /home/cftiangco/storage/qbittorrent/config
+            path: /media/SanDisk128/data/qbittorrent/config
         - name: download-volume
           hostPath:
-            path: /home/cftiangco/storage/qbittorrent/downloads 
+            path: /media/SanDisk128/data/qbittorrent/downloads
   replicas: 1
   selector:
     matchLabels:
