@@ -17,10 +17,15 @@ spec:
               value: 'America/Chicago'
             - name: WEBPASSWORD
               value: 'p@ssw0rd'
+          ports:
+            - containerPort: 80
+            - containerPort: 53
+            - containerPort: 67
+            - containerPort: 443
           volumeMounts:
             - mountPath: /etc/pihole
               name: pihole-etc-pihole
-            - mountPath: /etc/dnsmasq.d'
+            - mountPath: /etc/dnsmasq.d
               name: pihole-etc-dnsmasq
       volumes:
         - name: pihole-etc-pihole
@@ -40,28 +45,28 @@ kind: Service
 metadata:
   name: pihole-service
 spec:
-  type: NodePort
   selector:
     app: pihole
   ports:
-    - name: tcp-53
-      protocol: TCP
-      port: 53
-      targetPort: 53
-      nodePort: 30053
-    - name: udp-53
-      protocol: UDP
-      port: 53
-      targetPort: 53
-      nodePort: 30053
-    - name: udp-67
-      protocol: UDP
-      port: 67
-      targetPort: 67
-      nodePort: 30067
-    - name: tcp-80
-      protocol: TCP
-      port: 80
-      targetPort: 80
-      nodePort: 30080
+  - name: tcp-80
+    protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30080
+  - name: udp-53
+    protocol: UDP
+    port: 53
+    targetPort: 53
+    nodePort: 30053 
+  - name: tcp-443
+    protocol: TCP
+    port: 443
+    targetPort: 443
+    nodePort: 30443 
+  - name: udp-67
+    protocol: UDP
+    port: 67
+    targetPort: 67
+    nodePort: 30067 
+  type: NodePort
           
