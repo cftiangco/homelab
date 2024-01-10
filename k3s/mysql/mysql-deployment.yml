@@ -23,8 +23,8 @@ spec:
               mountPath: /var/lib/mysql
       volumes:
         - name: var-lib-mysql
-          hostPath: 
-            path: /persistent/mysql
+          persistentVolumeClaim:
+            claimName: homelab-pvc-mysql-claim
   replicas: 1
   selector:
     matchLabels:
