@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  template:
+    metadata:
+      name: mysql
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          ports:
+            - name: mysql
+              containerPort: 3306
+          volumeMounts:
+            - name: var-lib-mysql
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: var-lib-mysql
+          hostPath: 
+            path: /persistent/mysql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  type: NodePort
+  selector:
+      app: mysql
+  ports:
+    - name: tcp-3306
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+      nodePort: 30006

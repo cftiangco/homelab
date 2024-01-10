@@ -45,6 +45,7 @@ kind: Service
 metadata:
   name: pihole-service
 spec:
+  type: NodePort
   selector:
     app: pihole
   ports:
@@ -68,5 +69,4 @@ spec:
     port: 67
     targetPort: 67
     nodePort: 30067 
-  type: NodePort
           
