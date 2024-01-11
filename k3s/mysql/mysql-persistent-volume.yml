@@ -7,8 +7,8 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 3Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/persistent"
+    path: "/mnt/data"
