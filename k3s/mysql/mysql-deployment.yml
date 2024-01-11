@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: mysql
 spec:
   template:
     metadata:
@@ -21,10 +21,11 @@ spec:
           volumeMounts:
             - name: var-lib-mysql
               mountPath: /var/lib/mysql
+              subPath: mysql
       volumes:
         - name: var-lib-mysql
           persistentVolumeClaim:
-            claimName: homelab-pvc-mysql-claim
+            claimName: homelab-pv-claim
   replicas: 1
   selector:
     matchLabels:
