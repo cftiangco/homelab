@@ -2,15 +2,17 @@ version: "3.7"
 
 services:
   mysql:
-    image: mysql
+    image: mysql:latest
+    container_name: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
     ports:
-      - "3306:3306"
+      - 3306:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - /mnt/persistent/mysql:/var/lib/mysql
     networks:
       - homelab
-
+    restart: unless-stopped
 networks:
   homelab:
+    external: true
