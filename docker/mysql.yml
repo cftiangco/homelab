@@ -9,7 +9,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - /mnt/persistent/mysql:/var/lib/mysql
+      - /home/cftiangco/mysql:/var/lib/mysql
     networks:
       - homelab
     restart: unless-stopped
