@@ -22,6 +22,14 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
+  remote_host: #for docker agent comment if not needed
+    container_name: remote-host
+    image: remote-host
+    build: 
+      context: centos7
+    networks:
+      - homelab
+
 volumes:
   homelab:
     external: true
