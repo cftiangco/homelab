@@ -2,3 +2,5 @@ data
 docker/gitea
 docker/mysql
 docker/centos7/remote-*
+docker/jenkins-ansible/remote-*
+docker/jenkins-ansible/hosts*
