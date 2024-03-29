@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    user: root
+    privileged: true
+    environment:
+      - name=test
+    restart: unless-stopped
+    networks:
+      - homelab
+    volumes:
+      - /opt/jenkins:/var/jenkins_home #require to add permission to the map folder
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker #require to run docker socket inside jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+
+networks:
+  homelab:
+    external: true
