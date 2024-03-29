@@ -17,10 +17,6 @@ RUN /usr/sbin/sshd-keygen
 
 RUN yum -y install mysql
 
-# RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
-#   python get-pip.py && \
-#   pip install awscli --upgrade
-
 RUN yum -y install python3 && \
   yum -y install python3-pip && \
   pip3 install awscli
