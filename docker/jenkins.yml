@@ -25,6 +25,8 @@ services:
     image: remote-host
     build: 
       context: centos7
+    volumes:
+      - "/home/cftiangco/params/aws-s3.sh:/tmp/script.sh" #map the shell script on my host path, alternatively you can map the script inside shell folder 'mysql-to-aws-s3.sh'
     networks:
       - homelab
 
