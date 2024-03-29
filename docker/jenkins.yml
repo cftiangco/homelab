@@ -1,9 +1,5 @@
 version: "3.7"
 
-networks:
-  homelab:
-    external: true
-
 services:
   jenkins:
     image: jenkins/jenkins
@@ -22,7 +18,9 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
-  remote_host: #for docker agent comment if not needed
+
+  #for docker agent comment if not needed
+  remote_host:
     container_name: remote-host
     image: remote-host
     build: 
@@ -30,6 +28,21 @@ services:
     networks:
       - homelab
 
+  # For testing purposes not required can be comment during build
+  db_host:
+    container_name: db
+    image: mysql:5.7
+    environment:
+      - "MYSQL_ROOT_PASSWORD=1234"
+    volumes:
+      - homelab:/var/lib/mysql
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true
+    
 volumes:
   homelab:
     external: true
