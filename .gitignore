@@ -1,3 +1,4 @@
 data
 docker/gitea
 docker/mysql
+docker/centos7/remote-key*
