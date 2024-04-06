@@ -50,7 +50,24 @@ services:
     ports:
       - "80:80"
     networks:
-      - homelab	
+      - homelab
+
+  # gitlab:
+  #   image: gitlab/gitlab-ce:latest
+  #   container_name: gitlab
+  #   restart: always
+  #   hostname: 'gitlab.example.com'
+  #   ports:
+  #     - "2222:22"
+  #     - "8081:80"
+  #   volumes:
+  #     - /opt/gitlab/data:/var/opt/gitlab
+  #     - /opt/gitlab/logs:/var/log/gitlab
+  #     - /opt/gitlab/config:/etc/gitlab
+  #   networks:
+  #     - homelab
+      
+
 networks:
   homelab:
     external: true
