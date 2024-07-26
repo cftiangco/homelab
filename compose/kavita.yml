@@ -6,10 +6,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
+      - TZ=Asia/Manila
     volumes:
-      - ~/homelab/kavita/config:/config
-      - ~/homelab/kavita/data:/data #optional
+      - /home/cftiangco/homelab/kavita/config:/config
+      - /home/cftiangco/homelab/kavita/data:/data #optional
     ports:
       - 5000:5000
     restart: unless-stopped
