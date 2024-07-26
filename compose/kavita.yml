@@ -9,7 +9,7 @@ services:
       - TZ=Asia/Manila
     volumes:
       - /home/cftiangco/homelab/kavita/config:/config
-      - /home/cftiangco/homelab/kavita/data:/data #optional
+      - /home/cftiangco/books:/data #optional
     ports:
       - 5000:5000
     restart: unless-stopped
