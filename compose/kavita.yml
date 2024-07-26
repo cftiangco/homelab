@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.7"
 services:
   kavita:
     image: lscr.io/linuxserver/kavita:latest
@@ -13,3 +13,6 @@ services:
     ports:
       - 5000:5000
     restart: unless-stopped
+networks:
+  homelab:
+    external: true
