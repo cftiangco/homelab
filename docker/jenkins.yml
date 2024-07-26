@@ -2,9 +2,9 @@ version: "3.7"
 
 services:
   jenkins:
-    image: jenkins-ansible
+    image: jenkins/docker
     build:
-      context: jenkins-ansible
+      context: pipeline
     container_name: jenkins
     user: root
     privileged: true
@@ -48,7 +48,7 @@ services:
     build:
       context: jenkins-ansible/web
     ports:
-      - "80:80"
+      - "8081:80"
     networks:
       - homelab
 
