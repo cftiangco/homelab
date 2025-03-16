@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mongo:
-    image: mongo:6.0 # Use the latest stable MongoDB version
+    image: mongo:4.4 # Use the latest stable MongoDB version; 4.4 version is for Arch linux
     container_name: mongo_container
     restart: always
     ports:
@@ -12,7 +12,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
     volumes:
       - mongo_data:/data/db
-
+    networks:
+      - homelab
   mongo-express:
     image: mongo-express
     container_name: mongo_express_container
@@ -23,7 +24,12 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: secret
       ME_CONFIG_MONGODB_SERVER: mongo
+    networks:
+      - homelab
 
 volumes:
   mongo_data:
 
+networks:
+  homelab:
+    driver: bridge
