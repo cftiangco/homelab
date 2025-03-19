@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  mitmproxy:
+    image: mitmproxy/mitmproxy
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - /home/cftiangco/configs/mitmproxy:/home/mitmproxy/.mitmproxy
+    command: mitmweb 0.0.0.0 --set block_global=false
