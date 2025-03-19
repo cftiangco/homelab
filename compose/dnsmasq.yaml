@@ -10,3 +10,10 @@ services:
       - "53:53/udp"
     cap_add:
       - NET_ADMIN
+    networks:
+      homelab-net:
+        ipv4_address: 192.168.100.2
+
+networks:
+  homelab-net:
+    external: true
