@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  stirling-pdf:
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    ports:
+      - '8083:8080'
+    volumes:
+      - /home/cftiangco/configs/StirlingPDF/trainingData:/usr/share/tessdata # Required for extra OCR languages
+      - /home/cftiangco/configs/StirlingPDF/extraConfigs:/configs
+      - /home/cftiangco/configs/StirlingPDF/customFiles:/customFiles/
+      - /home/cftiangco/configs/StirlingPDF/logs:/logs/
+      - /home/cftiangco/configs/StirlingPDF/pipeline:/pipeline/
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - LANGS=en_GB
+    networks:
+      homelab-net:
+        ipv4_address: 192.168.100.4
+
+networks:
+  homelab-net:
+    external: true
