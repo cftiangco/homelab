@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  alltube:
+    image: rudloff/alltube
+    container_name: alltube
+    platform: linux/arm64
+    ports:
+      - "8081:80"  # Expose AllTube on port 8080
+    volumes:
+      - /home/cftiangco/downloads:/var/www/alltube/downloads  # Mount downloads folder
+    environment:
+      - UID=1000  # Set your user ID (optional)
+      - GID=1000  # Set your group ID (optional)
+    restart: unless-stopped
+    networks:
+      homelab-net:
+        ipv4_address: 192.168.100.5
+networks:
+  homelab-net:
+    external: true
