@@ -2,14 +2,17 @@ version: "3.7"
 
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:8.0
     container_name: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ragnarok
+      - MYSQL_USER=ragnarok
+      - MYSQL_PASSWORD=ragnarok
     ports:
       - 3306:3306
     volumes:
-      - /home/cftiangco/mysql:/var/lib/mysql
+      - ../data/mysql-db-data:/var/lib/mysql
     networks:
       - homelab
     restart: unless-stopped
